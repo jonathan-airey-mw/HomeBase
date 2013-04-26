@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="csv.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script 
+var downloadDataURI = function(options) {
+  if(!options) {
+    return;
+  }
+  $.isPlainObject(options) || (options = {data: options});
+  if(!$.browser.webkit) {
+    location.href = options.data;
+  }
+  options.filename || (options.filename = "download." + options.data.split(",")[0].split(";")[0].substring(5).split("/")[1]);
+  options.url || (options.url = "http://download-data-uri.appspot.com/");
+  $('<form method="post" action="'+options.url+'" style="display:none"><input type="hidden" name="filename" value="'+options.filename+'"/><input type="hidden" name="data" value="'+options.data+'"/></form>').submit().remove();
+}
+</script>
+<script type="text/javascript">
+downloadDataURI({
+        filename: "check.png", 
+        data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC"
+});
+</script>
+</head>
+<body>
+CSV
+</body>
+</html>
